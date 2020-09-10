@@ -4,12 +4,25 @@
 
 void	printf_c(va_list *my_list)
 {
-	char c;
+	//char c;
+	/*	printf("zzz\n");
+		d = va_arg(*my_list, int);
+		l_value = 1;
+		pas = 1;
+		write(1, &d, 1);
+*/
 
-	c = va_arg(*my_list, int);
-	write(1, &c, 1);
+	if (pas == 0)
+	{
+        d = va_arg(*my_list, int);
+        l_value = 1;
+        pas = 1;
+    }
+    else
+	    write(1, &d, 1);
 }
-/*
+
+/*s
 
 int main(void)
 {

@@ -15,8 +15,15 @@ void    ft_DecToHexa_moins(size_t n)
 
 void printf_xX(va_list *my_list)
 {
-    int n;
+    //int n;
 
-    n = va_arg(*my_list, int);
-    ft_DecToHexa(n);
+    //n = va_arg(*my_list, int);
+    if(pas == 0)
+    {
+        d = va_arg(*my_list, int);
+        l_value = (find_value_d(d));
+        pas = 1;
+    }
+    else
+        ft_DecToHexa(d);
 }

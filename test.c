@@ -4,8 +4,8 @@
 /*
 int main()
 {
-    float a = 2.318281828;
-    printf("%.0f", a);
+    int a = 64;
+    printf("%5.5p\n", a);
     //ft_IntToHexa(45);
     return 0;
 }*/

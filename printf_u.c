@@ -13,10 +13,17 @@ void	ft_putnbr_u_fd(unsigned int n)
 
 void    printf_u(va_list *my_list)
 {
-    unsigned int c;
+    //unsigned int c;
 
-    c = va_arg(*my_list, unsigned int);
-    ft_putnbr_u_fd(c);
+    //c = va_arg(*my_list, unsigned int);
+    if (pas == 0)
+	{
+        u = va_arg(*my_list, int);
+        l_value = 1;
+        pas = 1;
+    }
+    else
+        ft_putnbr_u_fd(u);
 }
 /*
 int main(void)

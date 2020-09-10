@@ -15,8 +15,15 @@ void            ft_DecToHexa(size_t n)
 
 void printf_x(va_list *my_list)
 {
-    size_t n;
+    //size_t n;
 
-    n = va_arg(*my_list, size_t);
-    ft_DecToHexa(n);
+    //n = va_arg(*my_list, size_t);
+    if (pas == 0)
+	{
+        p = va_arg(*my_list, int);
+        l_value = find_value_d(p);
+        pas = 1;
+    }
+    else
+        ft_DecToHexa(p);
 }

@@ -3,10 +3,17 @@
 
 void    printf_i(va_list *my_list)
 {
-    int c;
+    //int c;
 
-    c = va_arg(*my_list, int);
-    ft_putnbr_fd(c, 0);
+    //d = va_arg(*my_list, int);
+    if(pas == 0)
+    {
+        d = va_arg(*my_list, int);
+        l_value = (find_value_d(d));
+        pas = 1;
+    }
+    else
+        ft_putnbr_fd(d, 0);
 }
 /*
 int main(void)

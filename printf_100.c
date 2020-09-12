@@ -8,7 +8,10 @@ void printf_100(va_list *my_list)
 		pas = 1;
 	}
     else
+    {
         write(1, "%", 1);
+        pas = 0;
+    }
 }
 /*
 if (pas == 0)

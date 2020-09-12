@@ -10,22 +10,26 @@ void    printf_s(va_list *my_list)
     {
         s = NULL;
 	    s = va_arg(*my_list, char *);
+//printf("%s==========================\n", s);
         if (s == NULL)
         {
             pas = -1;
             return;
         }
         l_value = ft_strlen(s);
-        if (precision < l_value && precision != -1)
+        if (precision < l_value && precision != 0)
             l_value = precision;
         pas = 1;
     }
     else
+    {
         if (s == NULL)
             write(1, "(null)", 6);
         else
             while (s && s[i] && l_value--)
 		        ft_putchar_fd(s[i++], 0);
+        pas = 0;
+    }
 }
 /*
 if (pas == 0)

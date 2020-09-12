@@ -23,7 +23,10 @@ void    printf_u(va_list *my_list)
         pas = 1;
     }
     else
+    {
         ft_putnbr_u_fd(u);
+        pas = 0;
+    }
 }
 /*
 int main(void)

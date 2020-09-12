@@ -46,7 +46,7 @@ int main(void)
 	char buf[80];
 
 	mi = (1 << (bs-1)) + 1;
-	/*printf("%s\n", ptr);
+	printf("%s\n", ptr);
 	ft_printf("|%s|\n", ptr);
 	printf("printf test\n");
 	ft_printf("|printf test|\n");
@@ -57,19 +57,19 @@ int main(void)
 	printf("%d = - max int\n", mi);
 	ft_printf("|%d = - max int|\n", mi);
 	printf("|char %c = 'a'|\n", 'a');
-	ft_printf("|char %c = 'a'|\n", 'a');*/
+	ft_printf("|char %c = 'a'|\n", 'a');
 	printf("hex %x = ff\n", 0xff);
 	ft_printf("|hex %x = ff|\n", 0xff);
 	printf("hex %02x = 00\n", 0);
 	ft_printf("|hex %02x = 00|\n", 0);
-	/*printf("signed %d = unsigned %u = hex %x\n", -3, -3, -3);
+	printf("signed %d = unsigned %u = hex %x\n", -3, -3, -3);
 	ft_printf("|signed %d = unsigned %u = hex %x|\n", -3, -3, -3);
-	printf("%d %s(s)%", 0, "message");
-	ft_printf("|%d %s(s)%|", 0, "message");
+	printf("%d %s(s)%|\n", 0, "message");
+	ft_printf("|%d %s(s)%|\n", 0, "message");
 	printf("\n");
-	ft_printf("||\n");
+	ft_printf("\n");
 	printf("%d %s(s) with %%\n", 0, "message");
-	ft_printf("|%d %s(s) with %%\n|", 0, "message");*/
+	ft_printf("|%d %s(s) with %%\n", 0, "message");
 	/*sprintf(buf, "justif: \"%-10s\"\n", "left"); printf("%s", buf);
 	sprintf(buf, "justif: \"%10s\"\n", "right"); printf("%s", buf);
 	sprintf(buf, " 3: %04d zero padded\n", 3); printf("%s", buf);

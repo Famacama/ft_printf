@@ -19,7 +19,10 @@ void	printf_c(va_list *my_list)
         pas = 1;
     }
     else
-	    write(1, &d, 1);
+	{
+		write(1, &d, 1);
+		pas = 0;
+	}
 }
 
 /*s

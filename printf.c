@@ -13,7 +13,7 @@
 #include "printf.h"
 
 int y = 0;
-int flag = 0;
+int flag = -1;
 
 int symbol_min = 1;
 int symbol_plus = 0;
@@ -37,10 +37,13 @@ void (*TabFunction[9]) (va_list *) = {printf_c, printf_s, printf_p,
 
 
 
-int find_widht(const char *str, va_list *my_list, int index)
+int find_widht_2(const char *str, va_list *my_list, int index)
 {
+	//printf("\na\n");
+	//printf("str[index] %c\n", str[index]);
 	while (((str[index] >= 48 && str[index] <= 57) || (str[index] == '*')))
 	{
+		//printf("b\n");
 		if (str[index] == '*')
 		{
 			width = va_arg(*my_list, int);
@@ -57,8 +60,6 @@ int find_widht(const char *str, va_list *my_list, int index)
 	}
 	return(index);
 }
-
-
 
 
 
@@ -119,7 +120,7 @@ void find_precision(const char *str, va_list *my_list, int index)
 
 
 
-void find_widht_V(const char *str, va_list *my_list)
+void find_widht_1(const char *str, va_list *my_list)
 {
 	int index;
 
@@ -136,7 +137,8 @@ void find_widht_V(const char *str, va_list *my_list)
 			symbol_plus = 1;
 		index++;
 	}
-	index = find_widht(str, my_list, index);
+	//printf("index %d\n", index);
+	index = find_widht_2(str, my_list, index);
 	if (str[index] == '.')
 	{	
 		index++;
@@ -183,16 +185,25 @@ int find_conversion(const char *str)
 {
 	conversion = y;
 
+	//printf("\na\n");
 	while (str[conversion] && (str[conversion] != 'c' && str[conversion] != 's' 
 	&& str[conversion] != 'p' && str[conversion] != 'd' 
 	&& str[conversion] != 'i' && str[conversion] != 'u' 
 	&& str[conversion] != 'x' && str[conversion] != 'X' 
 	&& str[conversion] != '%'))
 	{
-		if (str[conversion] == '0' && flag != 0)
+		//printf("\nb\n");
+		//printf("|%c|\n", str[conversion]);
+		//printf("flag %d\n", flag);
+		if (str[conversion] == '0')
+		{
+			//printf("\nc\n");
 			zero_option = 1;
+		}
 		conversion++;
 	}
+	if (flag == 0)
+		zero_option = 0;
 	if (str[conversion])
 		y = conversion;
 	if (str[conversion])
@@ -266,8 +277,7 @@ void functions_0_1_8_char_s(void) // c s 100
 	printf_d, printf_i, printf_u, printf_x, printf_xX, printf_100};
 	
 	(*TabFunction[flag]) (&my_list);
-	(flag == 0) ? (width -= l_value) : 
-	((precision == 0) ? (width = 0) : (width -= l_value));
+	(flag == 0) ? (width -= l_value) : ((precision == 0) ? (width = 0) : (width -= l_value));
 	if(symbol_min == 1)
 	{
 		while (width-- > 0)
@@ -339,25 +349,25 @@ void functions_3_4_7_char_s(void)  //d i xX int
 
 
 
-
-
 void functions_2_6_char_s(void)  //p x
 {	
 	(*TabFunction[flag]) (&my_list);
-	width -= l_value;
-	printf("\nwidht %d\n", width);
-	printf("l-value %d\n", l_value);
-	precision -= l_value;
-	if(flag == 2)
-		precision += 2;
-	if(precision > 0)
-		width -= precision;
+	//printf("\n======================widht %d\n", width);
+	//printf("======================l_value %d\n", l_value);
+	if (width > l_value)
+		width -= l_value;
+	//if(precision > 0)
+	//	width -= precision;
 	if(symbol_min == 1)
 	{
-		printf("**zero option %d\n", zero_option);
-		printf("**widht %d\n", width);
+		//printf("======================zero %d\n", zero_option);
+		//printf("======================l_value %d\n", l_value);
+		//printf("======================widht %d\n", width);
 		while (width-- > 0)
+		{
+			//printf("a\n");
 			zero_option == 1 ? write(1, "0", 1) : write(1, "*", 1);
+		}
 		if(flag == 2)
 			write(1, "0x", 2);
 		while (precision-- > 0)
@@ -370,9 +380,70 @@ void functions_2_6_char_s(void)  //p x
 	while (precision-- > 0)
 		write(1, "0", 1);
 	(*TabFunction[flag]) (&my_list);
-	printf("zero option %d\n", zero_option);
 	while (width-- > 0)
 		zero_option == 1 ? write(1, "0", 1) : write(1, "*", 1);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	
+	
+	
+	
+	(*TabFunction[flag]) (&my_list);
+	width -= l_value;
+	precision -= l_value;
+	if(flag == 2)
+		precision += 2;
+	if(precision > 0)
+		width -= precision;
+	if(symbol_min == 1)
+	{
+		while (width-- > 0)
+		{
+			zero_option == 1 ? write(1, "0", 1) : write(1, "*", 1);
+		}
+		if(flag == 2)
+			write(1, "0x", 2);
+		while (precision-- > 0)
+			write(1, "0", 1);
+		(*TabFunction[flag]) (&my_list);
+		return;
+	}
+	if(flag == 2)
+		write(1, "0x", 2);
+	while (precision-- > 0)
+		write(1, "0", 1);
+	(*TabFunction[flag]) (&my_list);
+	while (width-- > 0)
+	{
+		printf("a\n");
+		zero_option == 1 ? write(1, "0", 1) : write(1, "*", 1);
+	}*/
 }
 
 
@@ -380,8 +451,28 @@ void functions_2_6_char_s(void)  //p x
 
 
 
-
-
+void functions_5_char_s(void)  // u unsigned int
+{	
+	(*TabFunction[flag]) (&my_list);
+	width -= l_value;
+	precision -= l_value;
+	if(precision > 0)
+		width -= precision;
+	if(symbol_min == 1)
+	{
+		while (width-- > 0)
+			zero_option == 1 ? write(1, "0", 1) : write(1, "*", 1);
+		while (precision-- > 0)
+			write(1, "0", 1);
+		(*TabFunction[flag]) (&my_list);
+		return;
+	}
+	while (precision-- > 0)
+		write(1, "0", 1);
+	(*TabFunction[flag]) (&my_list);
+	while (width-- > 0)
+		zero_option == 1 ? write(1, "0", 1) : write(1, "*", 1);
+}
 
 
 
@@ -406,8 +497,8 @@ int ft_printf(const char *str, ...)
 		if((y != 0) && (str[y - 1] == '%') && (find_conversion(str) != 0))
 		{ 
 			start_for_width_f = y;
-			precision = -1;
-			find_widht(str, &my_list, start_for_width_f);
+			precision = 0;
+			find_widht_1(str, &my_list);
 			flag = find_flag_function(TabIndex);
 			if (flag == 0 || flag == 1 || flag == 8) // char *s
 				functions_0_1_8_char_s();
@@ -415,8 +506,8 @@ int ft_printf(const char *str, ...)
 				functions_3_4_7_char_s();
 			else if (flag == 2 || flag == 6) // size_t
 				functions_2_6_char_s();
-			//else if (flag == 5) // unsigned int
-			//	functions_5_char_s();
+			else if (flag == 5) // unsigned int
+				functions_5_char_s();
 		}
 
 		else if (str[y] != '%')

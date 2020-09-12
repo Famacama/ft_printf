@@ -25,5 +25,8 @@ void printf_xX(va_list *my_list)
         pas = 1;
     }
     else
+    {
         ft_DecToHexa(d);
+        pas = 0;
+    }
 }

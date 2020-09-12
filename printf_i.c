@@ -13,7 +13,10 @@ void    printf_i(va_list *my_list)
         pas = 1;
     }
     else
+    {
         ft_putnbr_fd(d, 0);
+        pas = 0;
+    }
 }
 /*
 int main(void)

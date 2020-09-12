@@ -12,6 +12,20 @@ void            ft_DecToHexa(size_t n)
     else
         ft_putchar_fd(n + 48, 0);
 }
+/*
+void    find_value_Hexa(size_t n)
+{
+    if (n > 15)
+    {
+        ft_DecToHexa_plus(n / 16);
+        n %= 16;
+        l_value++;
+    }
+   if (n > 9)
+        l_value++;
+    else
+        l_value++;
+}*/
 
 void printf_x(va_list *my_list)
 {
@@ -20,8 +34,11 @@ void printf_x(va_list *my_list)
     //n = va_arg(*my_list, size_t);
     if (pas == 0)
 	{
-        p = va_arg(*my_list, int);
+        p = va_arg(*my_list, size_t);
         l_value = find_value_d(p);
+        // if (precision < l_value && precision != 0)
+          //  l_value = precision;
+      //  printf("======================l_value %d\n", l_value);
         pas = 1;
     }
     else

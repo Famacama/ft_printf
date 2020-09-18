@@ -1,18 +1,17 @@
 #include "printf.h"
-/*
+
 int main(void)
 {
-    int a = 59;
+    int a = 34636626;
     unsigned int c = -2444668;
     int b = 59;
     int X = 34;
     char *str = "why no";
-    ft_printf("moi j'ai ecrir %c---%s---%p---%d---%i---%u---%x---%X---%%", 'A', str, 3, a, 9, c, b, X);
-    printf("\n");
-    printf("moi j'ai ecrir %c---%s---%p---%d---%i---%u---%x---%X---%%", 'A', str, 3, a, 9, c, b, X);
-    printf("\n");
+    //ft_printf("%015.d\n", a);
+	printf("\n");
+    printf("%015.d\n", a);
     return(0);
-}*/
+}
 
 /*
 int main(void)
@@ -34,7 +33,7 @@ int main(void)
 //    printf("hello je bent %s en zou %d jaar en uw %p livelings letter is %c\n", "qwerty", 19, p, 'F');
 	return(0);
 }*/
-
+/*
 //#ifdef TEST_PRINTF
 int main(void)
 {
@@ -59,10 +58,10 @@ int main(void)
 	printf("|char %c = 'a'|\n", 'a');
 	ft_printf("|char %c = 'a'|\n", 'a');
 	printf("hex %x = ff\n", 0xff);
-	ft_printf("|hex %x = ff|\n", 0xff);
-	printf("hex %02x = 00\n", 0);
-	ft_printf("|hex %02x = 00|\n", 0);
-	printf("signed %d = unsigned %u = hex %x\n", -3, -3, -3);
+	ft_printf("|hex %x = ff|\n", 0xff);*/
+	//printf("hex %02x = 00\n", 1);
+	//ft_printf("|hex %02x = 00|\n", 1);
+	/*printf("signed %d = unsigned %u = hex %x\n", -3, -3, -3);
 	ft_printf("|signed %d = unsigned %u = hex %x|\n", -3, -3, -3);
 	printf("%d %s(s)%|\n", 0, "message");
 	ft_printf("|%d %s(s)%|\n", 0, "message");
@@ -70,14 +69,15 @@ int main(void)
 	ft_printf("\n");
 	printf("%d %s(s) with %%\n", 0, "message");
 	ft_printf("|%d %s(s) with %%\n", 0, "message");
-	/*sprintf(buf, "justif: \"%-10s\"\n", "left"); printf("%s", buf);
+	sprintf(buf, "justif: \"%-10s\"\n", "left"); printf("%s", buf);
 	sprintf(buf, "justif: \"%10s\"\n", "right"); printf("%s", buf);
 	sprintf(buf, " 3: %04d zero padded\n", 3); printf("%s", buf);
 	sprintf(buf, " 3: %-4d left justif.\n", 3); printf("%s", buf);
 	sprintf(buf, " 3: %4d right justif.\n", 3); printf("%s", buf);
 	sprintf(buf, "-3: %04d zero padded\n", -3); printf("%s", buf);
 	sprintf(buf, "-3: %-4d left justif.\n", -3); printf("%s", buf);
-	sprintf(buf, "-3: %4d right justif.\n", -3); printf("%s", buf);*/
+	sprintf(buf, "-3: %4d right justif.\n", -3); printf("%s", buf);
 
 	return 0;
 }
+*/

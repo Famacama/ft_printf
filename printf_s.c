@@ -1,6 +1,55 @@
 //copie x char
 #include "printf.h"
 
+
+
+
+void printf_s(va_list *my_list)
+{
+    char *s;
+    int i;
+    int length_value;
+
+    s = va_arg(*my_list, char *);
+    length_value = ft_strlen(s);
+    i = 0;
+
+    if (((cad).flag_precision < length_value))
+    {
+        if ((cad).flag_precision != -1)
+            (cad).flag_width += (length_value - (cad).flag_precision);
+        (cad).flag_width -= length_value;
+        length_value = (cad).flag_precision;
+    }
+    if ((cad).flag_minus == -1)
+	{
+		while((cad).flag_width-- > 0)
+			(cad).flag_zero == 1 ? write(1, "0", 1) : write(1, "*", 1);
+		if (s == NULL)
+            write(1, "(null)", 6);
+        else
+            while (s && s[i] && length_value--)
+		        ft_putchar_fd(s[i++], 0);
+	}
+	else
+	{
+		if (s == NULL)
+            write(1, "(null)", 6);
+        else
+            while (s && s[i] && length_value--)
+		        ft_putchar_fd(s[i++], 0);
+        while((cad).flag_width-- > 0)
+			(cad).flag_zero == 1 ? write(1, "0", 1) : write(1, "*", 1);
+    }
+}
+
+
+
+
+
+
+
+/*
 void    printf_s(va_list *my_list)
 {
     int i;
@@ -8,7 +57,7 @@ void    printf_s(va_list *my_list)
     i = 0;
 	if (pas == 0)
     {
-        s = NULL;
+        char *s;
 	    s = va_arg(*my_list, char *);
 //printf("%s==========================\n", s);
         if (s == NULL)
@@ -30,7 +79,7 @@ void    printf_s(va_list *my_list)
 		        ft_putchar_fd(s[i++], 0);
         pas = 0;
     }
-}
+}*/
 /*
 if (pas == 0)
 	{
@@ -39,8 +88,8 @@ if (pas == 0)
         pas = 1;
     }
     else
-	    ft_putnbr_fd(d, 0);*/
-/*
+	    ft_putnbr_fd(d, 0);
+
 int main(int argc, char **argv)
 {
     if (argc != 2)

@@ -9,28 +9,47 @@
 
 int l_value;
 int precision;
+
 int pas;
 
 
 //int y = 0;
 //symbol = 1;
 
-char *s;
+/*char *s;
 size_t p;
 int d;
-unsigned int u;
+unsigned int u;*/
+
+
+
+//flag_star = -1;
+
+//void (*TabFunction[9]) (va_list *) = {printf_c, printf_s, printf_p, 
+//	printf_d, printf_i, printf_u, printf_x, printf_xX, printf_100};
+typedef struct s_conversion_and_flags
+{
+    int conversion;
+    int flag_minus;
+    int flag_zero;
+    int flag_width;
+    int flag_precision;
+}               t_cad;  
 
 //i = 0;
+t_cad cad;
+int length_value;
+
 int     ft_printf(const char *str, ...);
 void	printf_c(va_list *my_list);
 void    printf_s(va_list *my_list);
 void	printf_p(va_list *my_list);
 void    printf_d(va_list *my_list);
-void	printf_i(va_list *my_list);
+/*void	printf_i(va_list *my_list);
 void    printf_u(va_list *my_list);
 void    printf_x(va_list *my_list);
 void    printf_xX(va_list *my_list);
-void    printf_100(va_list *my_list);
+void    printf_100(va_list *my_list);*/
 
 void	ft_DecToHexa(size_t n);
 void	ft_DecToHexa_plus(size_t n);

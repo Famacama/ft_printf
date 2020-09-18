@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+//#include "printf.h"
 
 int y = 0;
 int flag = -1;
@@ -39,11 +39,11 @@ void (*TabFunction[9]) (va_list *) = {printf_c, printf_s, printf_p,
 
 int find_widht_2(const char *str, va_list *my_list, int index)
 {
-	//printf("\na\n");
+	//printf("\nb\n");
 	//printf("str[index] %c\n", str[index]);
 	while (((str[index] >= 48 && str[index] <= 57) || (str[index] == '*')))
 	{
-		//printf("b\n");
+		//printf("c\n");
 		if (str[index] == '*')
 		{
 			width = va_arg(*my_list, int);
@@ -56,6 +56,7 @@ int find_widht_2(const char *str, va_list *my_list, int index)
 		}
 		width  *= 10;
 		width += str[index] - 48;
+		//printf("widht ===%d===\n", width);
 		index++;
 	}
 	return(index);
@@ -120,15 +121,17 @@ void find_precision(const char *str, va_list *my_list, int index)
 
 
 
-void find_widht_1(const char *str, va_list *my_list)
+void find_widht_1(const char *str, va_list *my_list, int index)
 {
-	int index;
+	//int index;
+	//printf("\na\n");
 
 	void (*TabFunction[9]) (va_list *) = {printf_c, printf_s, printf_p, 
 	printf_d, printf_i, printf_u, printf_x, printf_xX, printf_100};
 
 	index = start_for_width_f;
 	width = 0;
+	//printf(" a==str[index] %c\n", str[index]);
 	while (str[index] == '+' || str[index] == '-')
 	{
 		if (str[index] == '-')
@@ -244,7 +247,7 @@ int find_flag_function(char *TabIndex)
 	int index;
 
 	index = 0;
-	while (TabIndex[index] != conversion && TabIndex[index])
+	while ((TabIndex[index] != conversion) && TabIndex[index])
 		index++;
 	return (index);
 }
@@ -354,6 +357,7 @@ void functions_2_6_char_s(void)  //p x
 	(*TabFunction[flag]) (&my_list);
 	//printf("\n======================widht %d\n", width);
 	//printf("======================l_value %d\n", l_value);
+	printf("\nwidht %d\n", width);
 	if (width > l_value)
 		width -= l_value;
 	//if(precision > 0)
@@ -494,12 +498,13 @@ int ft_printf(const char *str, ...)
 	y = 0;
 	while (str[y])
 	{
-		if((y != 0) && (str[y - 1] == '%') && (find_conversion(str) != 0))
+		if((y != 0) && (str[y - 1] == '%'))
 		{ 
 			start_for_width_f = y;
 			precision = 0;
-			find_widht_1(str, &my_list);
+			find_widht_1(str, &my_list, start_for_width_f);
 			flag = find_flag_function(TabIndex);
+			find_conversion(str);
 			if (flag == 0 || flag == 1 || flag == 8) // char *s
 				functions_0_1_8_char_s();
    			else if (flag == 3 || flag == 4 || flag == 7) // int 

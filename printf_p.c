@@ -14,7 +14,7 @@ void    ft_DecToHexa_plus(size_t n)
         ft_putchar_fd(n + 48, 0);
 }
 
-void    find_length_hexa(int n)
+void    find_length_hexa(size_t n)
 {
     if (n > 15)
     {
@@ -36,7 +36,6 @@ void printf_p(va_list *my_list)
     find_length_hexa(p);
     length_value += 2;
 
-    
     if (((cad).flag_precision > (length_value - 2)))
 	{
 		(cad).flag_zero = 1;
@@ -46,7 +45,8 @@ void printf_p(va_list *my_list)
 	}
 	else
 	{
-		(cad).flag_zero = -1;
+        if ((cad).flag_precision < (length_value - 2) && ((cad).flag_precision != -1))
+            (cad).flag_zero = -1;
 		(cad).flag_width -= length_value;
 	}
     if ((cad).flag_minus == -1)

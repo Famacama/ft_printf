@@ -7,9 +7,9 @@ int main(void)
     int b = 59;
     int X = 34;
     char *str = "why no";
-    //ft_printf("%015.d\n", a);
+    ft_printf("%10.5d\n", 5);
 	printf("\n");
-    printf("%015.d\n", a);
+    printf("%10.5d\n", 5);
     return(0);
 }
 
@@ -33,8 +33,8 @@ int main(void)
 //    printf("hello je bent %s en zou %d jaar en uw %p livelings letter is %c\n", "qwerty", 19, p, 'F');
 	return(0);
 }*/
-/*
-//#ifdef TEST_PRINTF
+		/*
+		//#ifdef TEST_PRINTF
 int main(void)
 {
 	char *ptr = "Hello world!";

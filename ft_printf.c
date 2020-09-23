@@ -1,6 +1,7 @@
 #include "printf.h"
 
-void (*TabFunction[9]) (va_list *) = {printf_c, printf_s, printf_p, printf_d};
+void (*TabFunction[9]) (va_list *) = {printf_c, printf_s, printf_p,
+ printf_d, printf_i, printf_u, printf_x, printf_xX};
 
 int y = 0;
 va_list my_list;
@@ -45,10 +46,12 @@ int find_conversion(const char *str)
 	while ((str[y] != TabIndex[i]) && TabIndex[i] && str[y])
         i++;
     (i == 9) ? ((cad).conversion = -1) : ((cad).conversion = i);
+    //printf("(cad).conversion %d\n", (cad).conversion);
     if ((cad).conversion > 9 || ((cad).conversion < 0))
         return (-1);
     else
     {
+        //printf("c\n");
         y++;
         return ((cad).conversion);
     }
@@ -68,7 +71,7 @@ void find_all_flags_and_conversion(const char *str, va_list *my_list)
         }
         else if (((str[y] >= '0') && (str[y] <= '9')) || (str[y] == '*'))
         {
--            (str[y] == '*') ? ((cad).flag_width = va_arg(*my_list, int)) :
+            (str[y] == '*') ? ((cad).flag_width = va_arg(*my_list, int)) :
              ((cad).flag_width = ft_printf_atoi(str));
         }
         else if (str[y] == '.')
@@ -83,6 +86,7 @@ void find_all_flags_and_conversion(const char *str, va_list *my_list)
         }
         if (find_conversion(str) != -1)
         {
+            //printf("b\n");
             return;
         }
     }
@@ -99,15 +103,19 @@ void init_struct_to_begin_value(void)
 
 int ft_printf(const char *str, ...)
 {
+    //printf("y %d\n", y);
+    y = 0;
     va_start(my_list, str);
-    init_struct_to_begin_value();
     while(str[y])
     {
         if (str[y] == '%')
         {
+            init_struct_to_begin_value();
             find_all_flags_and_conversion(str, &my_list);
             if (((cad).conversion < 8) && ((cad).conversion > -1))
                 (*TabFunction[(cad).conversion]) (&my_list);
+            else if ((cad).conversion == 9)
+                printf_100();
             else
                 y++;
         }

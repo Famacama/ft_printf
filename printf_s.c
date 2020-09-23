@@ -8,7 +8,7 @@ void printf_s(va_list *my_list)
 {
     char *s;
     int i;
-    int length_value;
+    //int length_value;
 
     s = va_arg(*my_list, char *);
     length_value = ft_strlen(s);

@@ -21,14 +21,11 @@ int main(void)
 void    printf_d(va_list *my_list)
 {
     int d;
-    int length_value;
+    //int length_value;
 
     d = va_arg(*my_list, int);
     length_value = find_value_d(d);
-    printf("length_value %d\n", length_value);
-    printf("(cad).flag_width %d\n", (cad).flag_width);
-    printf("(cad).flag_precision %d\n", (cad).flag_precision);
-
+    
 	(cad).flag_width -= length_value;
     (cad).flag_precision -= length_value;
     if((cad).flag_precision != -1)
@@ -43,7 +40,7 @@ void    printf_d(va_list *my_list)
 
     if ((cad).flag_minus == -1)
     {
-        printf("a\n");
+        //printf("a\n");
         while((cad).flag_width-- > 0)
             write(1, "*", 1);
         while ((cad).flag_precision-- > 0)
@@ -52,13 +49,14 @@ void    printf_d(va_list *my_list)
     }
     else
 	{
-        printf("b\n");
+        //printf("b\n");
         while ((cad).flag_precision-- > 0)
             write(1, "0", 1);
 		ft_putnbr_fd(d, 0);
 		while ((cad).flag_width-- > 0)
 			write(1, "*", 1);
 	}
+}
 
 
 
@@ -85,9 +83,8 @@ void    printf_d(va_list *my_list)
 
 
 
-
-
-    /*//(cad).flag_width -= length_value;
+/*
+    //(cad).flag_width -= length_value;
     printf("length_value %d\n", length_value);
     if (((cad).flag_precision > (length_value)))
 	{
@@ -118,7 +115,7 @@ void    printf_d(va_list *my_list)
 		while ((cad).flag_width-- > 0)
 			write(1, "*", 1);
 	}*/
-}
+//}
 
 
 

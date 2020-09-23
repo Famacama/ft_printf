@@ -39,7 +39,7 @@ void printf_c(va_list *my_list)
 {
 	
 	char c;
-	int length_value;
+	//int length_value;
 
 	c = va_arg(*my_list, int);
 	length_value = 1;

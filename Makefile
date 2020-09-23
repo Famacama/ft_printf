@@ -39,8 +39,8 @@ O = 	ft_printf.o \
 
 all: $(NAME)
 $(NAME):
-	@make -C libft/ fclean && make -C libft/
-	#@$(CC) $(CFLAGS) $(LIB) -c $(SRC) -I /.
+	@make -C ./libft
+	cp $(LIB) ./$(NAME)
 	@$(CC) $(CFLAGS) -c $(SRC) -I /.
 	@ar rc $(NAME) $(O)
 	@ranlib $(NAME)

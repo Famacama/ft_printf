@@ -1,132 +1,87 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_testeur.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: famacama <famacama@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/21 12:32:59 by jecarere          #+#    #+#             */
+/*   Updated: 2020/09/23 19:47:43 by famacama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "printf.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+#include <float.h>
 
-void (*TabFunction[9]) (va_list *) = {printf_c, printf_s, printf_p,
- printf_d, printf_i, printf_u, printf_x, printf_xX};
-
-int y = 0;
-va_list my_list;
-
-//int flag_minus;
-//int flag_zero;
-//int flag_width;
-//int flag_precision;
-//int flag_star;
-/*int conversion;
-
-int flag_minus = -1;
-int flag_zero = -1;
-int flag_width = -1;
-int flag_precision = -1;*/
-
-//void (*TabFunction[9]) (va_list *) = {printf_c, printf_s, printf_p, 
-//	printf_d, printf_i, printf_u, printf_x, printf_xX, printf_100};
-
-
-int ft_printf_atoi(const char *str)
+int	parse_tag(va_list ap, char **format)
 {
-    int n;
+	t_arg	*arg;
+	int		return_val;
 
-    n = 0;
-    while ((str[y] >= '0' && str[y] <= '9') && str[y])
+	arg = init_arg();
+	(*format)++;
+	if ((**format == '+') || (**format == '-') || (**format == ' ') || \
+		(**format == '0') || (**format == '#'))
+		get_flags(format, arg);
+	if (ft_isdigit(**format) || (**format == '*'))
+		get_width(ap, format, arg);
+	if (**format == '.')
+		get_precision(ap, format, arg);
+	if ((**format == 'h') || (**format == 'l') || (**format == 'L'))
+		get_length(format, arg);
+	if ((**format == 'd') || (**format == 'i') || (**format == 'o') || \
+		(**format == 'u') || (**format == 'x') || (**format == 'X') || \
+		(**format == 'c') || (**format == 's') || (**format == 'p') || \
+		(**format == 'f') || (**format == '%'))
+		get_specifier(ap, format, arg);
+	else
+		handle_pc(arg, format);
+	return_val = arg->return_val;
+	return (return_val);
+}
+
+int		parse_format(char **format, va_list ap)
+{
+	int		return_val;
+	int		len;
+
+	return_val = 0;
+	while (**format)
 	{
-		n *= 10;
-		n += str[y] - 48;
-		y++;
+		if (**format == '%')
+			return_val += parse_tag(ap, format);
+		if (**format == '\0')
+			break ;
+		if (ft_strchr(*format, '%'))
+		{
+			len = ft_putstrchr(*format, '%');
+			return_val += len;
+			*format += len;
+		}
+		else
+		{
+			len = ft_putstrchr(*format, '\0');
+			return_val += len;
+			*format += len;
+		}
 	}
-    y--;
-    return(n);
+	return (return_val);
 }
 
-int find_conversion(const char *str)
+int		ft_printf(const char *format, ...)
 {
-    int i;
-    char TabIndex[10] = {'c', 's', 'p', 'd', 'i', 'u', 'x', 'X', '%', 0};
+	va_list ap;
+	int	return_val;
 
-	i = 0;
-	while ((str[y] != TabIndex[i]) && TabIndex[i] && str[y])
-        i++;
-    (i == 9) ? ((cad).conversion = -1) : ((cad).conversion = i);
-    //printf("(cad).conversion %d\n", (cad).conversion);
-    if ((cad).conversion > 9 || ((cad).conversion < 0))
-        return (-1);
-    else
-    {
-        //printf("c\n");
-        y++;
-        return ((cad).conversion);
-    }
+	va_start(ap, format);
+	return_val = parse_format((char**)&format, ap);
+	va_end(ap);
+	return (return_val);
 }
 
-void find_all_flags_and_conversion(const char *str, va_list *my_list)
-{
-    while (str[++y])
-    {
-        if (str[y] == '-' && str[y])
-        {
-            (cad).flag_minus = 1;
-        }
-        else if ((str[y] == '0') && (str[y]) && ((cad).flag_zero != 1))
-        {
-            (cad).flag_zero = 1;
-        }
-        else if (((str[y] >= '0') && (str[y] <= '9')) || (str[y] == '*'))
-        {
-            (str[y] == '*') ? ((cad).flag_width = va_arg(*my_list, int)) :
-             ((cad).flag_width = ft_printf_atoi(str));
-        }
-        else if (str[y] == '.')
-        {
-            y++;
-            if ((str[y] >= '0') && (str[y] <= '9'))
-                (cad).flag_precision = ft_printf_atoi(str);
-            else if (str[y] == '*')
-                (cad).flag_precision = va_arg(*my_list, int);
-            else
-                (cad).flag_precision = 0;
-        }
-        if (find_conversion(str) != -1)
-        {
-            //printf("b\n");
-            return;
-        }
-    }
-}
-
-void init_struct_to_begin_value(void)
-{
-    cad.conversion = 0;
-    cad.flag_minus = -1;
-    cad.flag_precision = -1;
-    cad.flag_width = -1;
-    cad.flag_zero = -1;
-}
-
-int ft_printf(const char *str, ...)
-{
-    //printf("y %d\n", y);
-    y = 0;
-    va_start(my_list, str);
-    while(str[y])
-    {
-        if (str[y] == '%')
-        {
-            init_struct_to_begin_value();
-            find_all_flags_and_conversion(str, &my_list);
-            if (((cad).conversion < 8) && ((cad).conversion > -1))
-                (*TabFunction[(cad).conversion]) (&my_list);
-            else if ((cad).conversion == 9)
-                printf_100();
-            else
-                y++;
-        }
-        else
-        {
-            write(1, &str[y], 1);
-            y++;
-        }
-    }
-    return (0);
-}
 
 #include <stdio.h>
 #include "printf.h"

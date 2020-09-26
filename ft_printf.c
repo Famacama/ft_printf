@@ -92,6 +92,28 @@ void find_all_flags_and_conversion(const char *str, va_list *my_list)
     }
 }
 
+int	return_value(void)
+{
+	if ((cad).flag_precision > -1)
+	{
+		//printf("(cad).flag_precision %d\n", (cad).flag_precision);
+		x -= (cad).flag_precision;
+	}
+	if ((cad).flag_width > -1)
+	{
+		//printf("(cad).flag_width %d\n", (cad).flag_width);
+		x += (cad).flag_width;
+	}
+
+	if (length_value > -1)
+	{
+		//printf("length_value %d\n", length_value);
+		x += length_value;
+	}
+	//x += y;
+	return (x);
+}
+
 void init_struct_to_begin_value(void)
 {
     cad.conversion = 0;
@@ -105,6 +127,8 @@ int ft_printf(const char *str, ...)
 {
     //printf("y %d\n", y);
     y = 0;
+	x = 0;
+	//printf("strlen str %d\n", x);
     va_start(my_list, str);
     while(str[y])
     {
@@ -124,7 +148,9 @@ int ft_printf(const char *str, ...)
         {
             write(1, &str[y], 1);
             y++;
+			x++;
         }
     }
-    return (0);
+	printf("len str %d\n", x);
+    return (x);
 }

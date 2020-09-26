@@ -12,19 +12,34 @@ void printf_s(va_list *my_list)
 
     s = va_arg(*my_list, char *);
     length_value = ft_strlen(s);
+    x += length_value;
     i = 0;
-
+    //printf("LV %d\n",length_value);
+    //return_value();
     if (((cad).flag_precision < length_value))
     {
         if ((cad).flag_precision != -1)
             (cad).flag_width += (length_value - (cad).flag_precision);
         (cad).flag_width -= length_value;
+        //return_value();
         length_value = (cad).flag_precision;
+        
     }
     else
+    {
         (cad).flag_width -= length_value;
+        
+    }
+    //printf("LV2 %d\n",length_value);
+    
     if ((cad).flag_minus == -1)
 	{
+        printf("A\n");
+        printf("strlen s %d\n", ft_strlen(s));
+        printf("length_value %d\n", length_value);
+        printf("(cad).flag_width %d\n", (cad).flag_width);
+        printf("(cad).flag_precision %d\n", (cad).flag_precision);
+        return_value();
 		while((cad).flag_width-- > 0)
 			(cad).flag_zero == 1 ? write(1, "0", 1) : write(1, " ", 1);
 		if (s == NULL)
@@ -35,6 +50,12 @@ void printf_s(va_list *my_list)
 	}
 	else
 	{
+        printf("B\n");
+        printf("strlen s %d\n", ft_strlen(s));
+        printf("length_value %d\n", length_value);
+        printf("(cad).flag_width %d\n", (cad).flag_width);
+        printf("(cad).flag_precision %d\n", (cad).flag_precision);
+        return_value();
 		if (s == NULL)
             write(1, "(null)", 6);
         else

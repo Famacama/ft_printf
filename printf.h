@@ -8,7 +8,7 @@
 #include <stdarg.h>
 
 int l_value;
-
+int x;
 typedef struct s_conversion_and_flags
 {
     int conversion;
@@ -36,7 +36,8 @@ void    printf_100(void);
 void    find_length_hexa(size_t n);
 
 void	ft_DecToHexa(size_t n);
-void	ft_DecToHexa_plus(size_t n);/*
+void	ft_DecToHexa_plus(size_t n);
+int     return_value(void);/*
 void	ft_DecToHexa_moins(size_t n);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putnbr_u_fd(unsigned int n);

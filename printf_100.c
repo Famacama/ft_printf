@@ -3,6 +3,7 @@
 //void printf_100(va_list *my_list)
 void printf_100(void)
 {
+
     char cent;
 	//int length_value;
 

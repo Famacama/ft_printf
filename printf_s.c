@@ -21,10 +21,12 @@ void printf_s(va_list *my_list)
         (cad).flag_width -= length_value;
         length_value = (cad).flag_precision;
     }
+    else
+        (cad).flag_width -= length_value;
     if ((cad).flag_minus == -1)
 	{
 		while((cad).flag_width-- > 0)
-			(cad).flag_zero == 1 ? write(1, "0", 1) : write(1, "*", 1);
+			(cad).flag_zero == 1 ? write(1, "0", 1) : write(1, " ", 1);
 		if (s == NULL)
             write(1, "(null)", 6);
         else
@@ -39,7 +41,7 @@ void printf_s(va_list *my_list)
             while (s && s[i] && length_value--)
 		        ft_putchar_fd(s[i++], 0);
         while((cad).flag_width-- > 0)
-			(cad).flag_zero == 1 ? write(1, "0", 1) : write(1, "*", 1);
+			(cad).flag_zero == 1 ? write(1, "0", 1) : write(1, " ", 1);
     }
 }
 

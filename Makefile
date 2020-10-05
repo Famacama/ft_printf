@@ -16,7 +16,6 @@ SRCS = 	ft_printf.c \
 		ft_putstr_fd.c \
 		ft_putchar_fd.c \
 		ft_putnbr_fd.c \
-		test.c \
 
 OBJS		= $(SRCS:.c=.o)
 RM			= rm -f

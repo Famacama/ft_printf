@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbook <macbook@student.42.fr>            +#+  +:+       +#+        */
+/*   By: famacama <famacama@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 15:31:35 by famacama          #+#    #+#             */
-/*   Updated: 2020/06/04 11:36:28 by macbook          ###   ########.fr       */
+/*   Updated: 2020/10/04 17:51:02 by famacama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,8 @@
 void	ft_putnbr_fd(int n, int fd)
 {
 	unsigned int nbr;
-
 	if (n < 0)
-	{
 		nbr = -n;
-		write(fd, "-", 1);
-	}
 	else
 		nbr = n;
 	if (nbr > 9)

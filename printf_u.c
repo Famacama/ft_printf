@@ -1,39 +1,13 @@
 #include "printf.h"
-/*
-void	ft_putnbr_u_fd(unsigned int n)
-{
-	if (n > 9)
-	{
-		ft_putnbr_u_fd(n / 10);
-        ft_putnbr_u_fd(n % 10);
-	}
-	else
-		ft_putchar_fd(n + 48, 0);
-}
 
-void    printf_u(va_list *my_list)
+int find_value_u(unsigned int number)
 {
-    //unsigned int c;
-
-    //c = va_arg(*my_list, unsigned int);
-    if (pas == 0)
-	{
-        int u;
-        u = va_arg(*my_list, unsigned int);
-        l_value = 1;
-        pas = 1;
-    }
-    else
+    l_value = 0;
+    if (number <= 0)
     {
-        ft_putnbr_u_fd(u);
-        pas = 0;
+        number *= -1;
+        l_value = 1;
     }
-}
-*/
-int find_value_u(unsigned int d)
-{
-    unsigned int number;
-    number = d;
     while (number > 0)
     {
         number /= 10;
@@ -49,7 +23,7 @@ void	ft_putnbr_uu_fd(unsigned int n, int fd)
 	if (n < 0)
 	{
 		nbr = -n;
-		write(fd, "-", 1);
+		ft_putchar_fd('-', 0);
 	}
 	else
 		nbr = n;
@@ -64,61 +38,76 @@ void	ft_putnbr_uu_fd(unsigned int n, int fd)
 	}
 }
 
+void check_for_printf_u(int u)
+{
+    if (((cad).flag_precision > (length_value)))
+	{
+		(cad).flag_zero = -1;
+        zero_for_precision = 1;
+		if ((cad).flag_width <= (((cad).flag_precision)))
+			(cad).flag_minus = -1;
+		(cad).flag_width -= (((cad).flag_precision));
+        (cad).flag_precision -= length_value;
+	}
+	else
+	{
+        if ((cad).flag_precision <= (length_value) && ((cad).flag_precision != -1))
+        {
+			if (u == 0 &&(cad).flag_precision == 0)
+			{
+				if ((cad).flag_width)
+					(cad).flag_width++;
+				do_not_print = 1;
+			}
+			if ((cad).flag_precision < (length_value))
+				(cad).flag_zero = -1;
+			(cad).flag_precision -= (length_value);
+		}
+		(cad).flag_width -= length_value;
+	}
+}
+
+void write_when_not_minus_u(int u)
+{
+    if ((cad).flag_zero == -1)
+		{
+            while((cad).flag_width-- > 0)
+                (cad).flag_zero == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
+            while((cad).flag_precision-- > 0)
+                zero_for_precision == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
+			if (!do_not_print)
+				ft_putnbr_uu_fd(u, 0);		
+        }
+        else
+        {
+            while((cad).flag_width-- > 0)
+                (cad).flag_zero == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
+            while((cad).flag_precision-- > 0)
+                zero_for_precision == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0); 
+			if (!do_not_print)
+				ft_putnbr_uu_fd(u, 0);
+        }
+}
 
 void    printf_u(va_list *my_list)
 {
-    unsigned long u;
+    int u;
 
+	do_not_print = 0;
+    zero_for_precision = 0;
     u = va_arg(*my_list, int);
     length_value = find_value_u(u);
     
-	(cad).flag_width -= length_value;
-    (cad).flag_precision -= length_value;
-    if((cad).flag_precision != -1)
-    {
-        (cad).flag_width -= (cad).flag_precision;
-        (cad).flag_zero = -1;
-    }
-	//(cad).flag_precision -= length_value;
-	//if((cad).flag_precision > 0)
-	//	(cad).flag_width  -= (cad).flag_precision;
-
-
+    check_for_printf_u(u);
     if ((cad).flag_minus == -1)
-    {
-        while((cad).flag_width-- > 0)
-            write(1, "*", 1);
-        while ((cad).flag_precision-- > 0)
-            write(1, "0", 1);
-        ft_putnbr_uu_fd(u, 0);
-    }
+        write_when_not_minus_u(u);
     else
 	{
-        while ((cad).flag_precision-- > 0)
-            write(1, "0", 1);
-		ft_putnbr_uu_fd(u, 0);
+		while((cad).flag_precision-- > 0)
+            zero_for_precision == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0); 
+		if (!do_not_print)
+				ft_putnbr_uu_fd(u, 0);
 		while ((cad).flag_width-- > 0)
-			write(1, "*", 1);
-	}
-    return;
+			ft_putchar_fd(' ', 0);
+	}    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-int main(void)
-{
-    unsigned int c = -2444668;
-    //int d = &c;
-    printf_u(c);
-    printf("\nu = %u", c);
-}*/

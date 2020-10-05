@@ -27,15 +27,8 @@ void    find_length_hexa(size_t n)
         length_value++;
 }
 
-void printf_p(va_list *my_list)
+void check_for_printf_p(size_t p)
 {
-    size_t p;
-    length_value = 0;
-
-    p = va_arg(*my_list, size_t);
-    find_length_hexa(p);
-    length_value += 2;
-
     if (((cad).flag_precision > (length_value - 2)))
 	{
 		(cad).flag_zero = 1;
@@ -45,109 +38,54 @@ void printf_p(va_list *my_list)
 	}
 	else
 	{
+        if (p == 0 &&(cad).flag_precision == 0)
+		{
+			if ((cad).flag_width)
+				(cad).flag_width++;
+			do_not_print = 1;
+		}
         if ((cad).flag_precision < (length_value - 2) && ((cad).flag_precision != -1))
             (cad).flag_zero = -1;
 		(cad).flag_width -= length_value;
 	}
-    if ((cad).flag_minus == -1)
-    {
-        if ((cad).flag_zero == -1)
-		{
-            while((cad).flag_width-- > 0)
-                (cad).flag_zero == 1 ? write(1, "0", 1) : write(1, "*", 1);
-			write(1, "0x", 2);
-        }
-        else
-        {
-			write(1, "0x", 2);
-            while((cad).flag_width-- > 0)
-                (cad).flag_zero == 1 ? write(1, "0", 1) : write(1, "*", 1); 
-        }
-        ft_DecToHexa_plus((size_t)p);
-    }
-    else
-	{
-        write(1, "0x", 2);
-		ft_DecToHexa_plus((size_t)p);
-		while ((cad).flag_width-- > 0)
-			write(1, "*", 1);
-	}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    
-    if ((cad).flag_minus == -1)
-	{
-        if ((cad).flag_zero != 1)
-        {
-            printf("\na\n");
-            while((cad).flag_width-- > 0)
-                (cad).flag_zero == 1 ? write(1, "0", 1) : write(1, "*", 1);
-            write(1, "0x", 2);
-            ft_DecToHexa_plus((size_t)p);
-        }
-        else
-        {
-            printf("\nb\n");
-            write(1, "0x", 2);
-            while((cad).flag_width-- > 0)
-                write(1, "*", 1);
-            ft_DecToHexa_plus((size_t)p); 
-        }
-        
-    }
-    else
-    {
-        if ((cad).flag_zero != 1)
-        {
-            printf("\nc\n");
-            write(1, "0x", 2);
-            ft_DecToHexa_plus((size_t)p);
-            while((cad).flag_width-- > 0)
-                (cad).flag_zero == 1 ? write(1, "0", 1) : write(1, "*", 1);
-        }
-        else
-        {
-            printf("\nd\n");
-            write(1, "0x", 2);
-            ft_DecToHexa_plus((size_t)p);
-            while((cad).flag_width-- > 0)
-                write(1, "*", 1);
-                //(cad).flag_zero == 1 ? write(1, "0", 1) : write(1, "*", 1); 
-            
-        }        
-    }*/
-    
 }
 
-
-
-/*
-void	printf_p(va_list *my_list)
+void write_when_not_minus_p(size_t p)
 {
-    //size_t c;
-    if(pas == 0)
-    {
-        p = va_arg(*my_list, size_t);
-        l_value = 0;
-        find_value_Hexa(p);
-        l_value += 2;
-        //printf("l_value %d\n", l_value);
-        pas = 1;
+    if ((cad).flag_zero == -1)
+	{
+        while((cad).flag_width-- > 0)
+            (cad).flag_zero == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
+		ft_putstr_fd("0x", 0);
     }
     else
     {
-        //write(1, "0x", 2);
-        ft_DecToHexa_plus((size_t)p);
-        pas = 0;
+		ft_putstr_fd("0x", 0);
+        while((cad).flag_width-- > 0)
+            (cad).flag_zero == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0); 
     }
-}*/
+    if (!do_not_print)
+        ft_DecToHexa_plus((size_t)p);
+}
+
+void printf_p(va_list *my_list)
+{
+    size_t p;
+
+    p = va_arg(*my_list, size_t);
+    length_value = 0;
+    find_length_hexa(p);
+    length_value += 2;
+    do_not_print = 0;
+    check_for_printf_p(p);
+    if ((cad).flag_minus == -1)
+        write_when_not_minus_p(p);
+    else
+	{
+        ft_putstr_fd("0x", 0);
+        if (!do_not_print)
+		    ft_DecToHexa_plus((size_t)p);
+		while ((cad).flag_width-- > 0)
+			ft_putchar_fd(' ', 0);
+	}
+}

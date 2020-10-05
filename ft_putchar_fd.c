@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbook <macbook@student.42.fr>            +#+  +:+       +#+        */
+/*   By: famacama <famacama@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 14:27:11 by famacama          #+#    #+#             */
-/*   Updated: 2020/06/04 11:36:09 by macbook          ###   ########.fr       */
+/*   Updated: 2020/09/27 17:44:32 by famacama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,7 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
+	fd = 1;
 	write(fd, &c, 1);
+	r++;
 }

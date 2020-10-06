@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: famacama <famacama@student.s19.be>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/10/06 10:02:09 by famacama          #+#    #+#              #
+#    Updated: 2020/10/06 10:02:16 by famacama         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME		= libftprintf.a
 LIBFT		= libft
 LIBFT_LIB	= libft.a
@@ -16,6 +28,7 @@ SRCS = 	ft_printf.c \
 		ft_putstr_fd.c \
 		ft_putchar_fd.c \
 		ft_putnbr_fd.c \
+		printf_utils.c \
 
 OBJS		= $(SRCS:.c=.o)
 RM			= rm -f

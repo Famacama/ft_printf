@@ -6,7 +6,7 @@
 /*   By: famacama <famacama@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 15:31:35 by famacama          #+#    #+#             */
-/*   Updated: 2020/10/04 17:51:02 by famacama         ###   ########.fr       */
+/*   Updated: 2020/10/09 13:21:05 by famacama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_putnbr_fd(int n, int fd)
 {
 	unsigned int nbr;
+
 	if (n < 0)
 		nbr = -n;
 	else

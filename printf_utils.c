@@ -5,52 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: famacama <famacama@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/06 10:03:16 by famacama          #+#    #+#             */
-/*   Updated: 2020/10/06 10:03:18 by famacama         ###   ########.fr       */
+/*   Created: 2020/10/09 13:24:08 by famacama          #+#    #+#             */
+/*   Updated: 2020/10/09 13:32:05 by famacama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int	ft_printf_atoi(const char *str)
+int		ft_printf_atoi(const char *str)
 {
 	int n;
 
 	n = 0;
-	while ((str[y] >= '0' && str[y] <= '9') && str[y])
+	while ((str[g_y] >= '0' && str[g_y] <= '9') && str[g_y])
 	{
 		n *= 10;
-		n += str[y] - 48;
-		y++;
+		n += str[g_y] - 48;
+		g_y++;
 	}
-	y--;
+	g_y--;
 	return (n);
 }
 
-int	find_conversion(const char *str)
+int		find_conversion(const char *str)
 {
-	int i;
-	char TabIndex[10] = {'c', 's', 'p', 'd', 'i', 'u', 'x', 'X', '%', 0};
+	static char	tabindex[10] = {'c', 's', 'p', 'd', 'i', 'u', 'x', 'X', '%', 0};
+	int			i;
 
 	i = 0;
-	while ((str[y] != TabIndex[i]) && TabIndex[i] && str[y])
+	while ((str[g_y] != tabindex[i]) && tabindex[i] && str[g_y])
 		i++;
-	(i == 9) ? ((cad).conversion = -1) : ((cad).conversion = i);
-	if ((cad).conversion > 9 || ((cad).conversion < 0))
+	if (i == 9)
+		(g_cad).conversion = -1;
+	else
+		(g_cad).conversion = i;
+	if ((g_cad).conversion > 9 || ((g_cad).conversion < 0))
 		return (-1);
 	else
 	{
-		y++;
-		return ((cad).conversion);
+		g_y++;
+		return ((g_cad).conversion);
 	}
 }
 
 void	init_struct_to_begin_value(void)
 {
-	cad.conversion = -1;
-	cad.flag_minus = -1;
-	cad.flag_precision = -1;
-	cad.flag_width = -1;
-	cad.flag_zero = -1;
-	length_value = 0;
+	g_cad.conversion = -1;
+	g_cad.f_m = -1;
+	g_cad.f_p = -1;
+	g_cad.f_w = -1;
+	g_cad.f_z = -1;
+	g_length_value = 0;
 }

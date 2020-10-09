@@ -6,26 +6,26 @@
 /*   By: famacama <famacama@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 10:03:10 by famacama          #+#    #+#             */
-/*   Updated: 2020/10/06 10:03:12 by famacama         ###   ########.fr       */
+/*   Updated: 2020/10/09 13:10:56 by famacama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int	find_value_u(unsigned int number)
+int		find_value_u(unsigned int number)
 {
-	l_value = 0;
+	g_l_value = 0;
 	if (number <= 0)
 	{
 		number *= -1;
-		l_value = 1;
+		g_l_value = 1;
 	}
 	while (number > 0)
 	{
 		number /= 10;
-		l_value++;
+		g_l_value++;
 	}
-	return (l_value);
+	return (g_l_value);
 }
 
 void	ft_putnbr_uu_fd(unsigned int n, int fd)
@@ -50,75 +50,75 @@ void	ft_putnbr_uu_fd(unsigned int n, int fd)
 	}
 }
 
-void		check_for_printf_u(int u)
+void	check_for_printf_u(int u)
 {
-	if (((cad).flag_precision > (length_value)))
+	if (((g_cad).f_p > (g_length_value)))
 	{
-		(cad).flag_zero = -1;
-		zero_for_precision = 1;
-		if ((cad).flag_width <= (((cad).flag_precision)))
-			(cad).flag_minus = -1;
-		(cad).flag_width -= (((cad).flag_precision));
-		(cad).flag_precision -= length_value;
+		(g_cad).f_z = -1;
+		g_zero_f_p = 1;
+		if ((g_cad).f_w <= (((g_cad).f_p)))
+			(g_cad).f_m = -1;
+		(g_cad).f_w -= (((g_cad).f_p));
+		(g_cad).f_p -= g_length_value;
 	}
 	else
 	{
-		if ((cad).flag_precision <= (length_value) && ((cad).flag_precision != -1))
+		if ((g_cad).f_p <= (g_length_value) && ((g_cad).f_p != -1))
 		{
-			if (u == 0 && (cad).flag_precision == 0)
+			if (u == 0 && (g_cad).f_p == 0)
 			{
-				if ((cad).flag_width)
-					(cad).flag_width++;
-				do_not_print = 1;
+				if ((g_cad).f_w)
+					(g_cad).f_w++;
+				g_do_not_print = 1;
 			}
-			if ((cad).flag_precision < (length_value))
-				(cad).flag_zero = -1;
-			(cad).flag_precision -= (length_value);
+			if ((g_cad).f_p < (g_length_value))
+				(g_cad).f_z = -1;
+			(g_cad).f_p -= (g_length_value);
 		}
-		(cad).flag_width -= length_value;
+		(g_cad).f_w -= g_length_value;
 	}
 }
 
-void		write_when_not_minus_u(int u)
+void	write_when_not_minus_u(int u)
 {
-	if ((cad).flag_zero == -1)
+	if ((g_cad).f_z == -1)
 	{
-		while ((cad).flag_width-- > 0)
-			(cad).flag_zero == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
-		while ((cad).flag_precision-- > 0)
-			zero_for_precision == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
-		if (!do_not_print)
+		while ((g_cad).f_w-- > 0)
+			(g_cad).f_z == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
+		while ((g_cad).f_p-- > 0)
+			g_zero_f_p == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
+		if (!g_do_not_print)
 			ft_putnbr_uu_fd(u, 0);
 	}
 	else
 	{
-		while ((cad).flag_width-- > 0)
-			(cad).flag_zero == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
-		while ((cad).flag_precision-- > 0)
-			zero_for_precision == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
-		if (!do_not_print)
+		while ((g_cad).f_w-- > 0)
+			(g_cad).f_z == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
+		while ((g_cad).f_p-- > 0)
+			g_zero_f_p == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
+		if (!g_do_not_print)
 			ft_putnbr_uu_fd(u, 0);
 	}
 }
 
-void		printf_u(va_list *my_list)
+void	printf_u(va_list *g_my_list)
 {
 	int	u;
 
-	do_not_print = 0;
-	zero_for_precision = 0;
-	u = va_arg(*my_list, int);
-	length_value = find_value_u(u);
+	g_do_not_print = 0;
+	g_zero_f_p = 0;
+	u = va_arg(*g_my_list, int);
+	g_length_value = find_value_u(u);
 	check_for_printf_u(u);
-	if ((cad).flag_minus == -1)
+	if ((g_cad).f_m == -1)
 		write_when_not_minus_u(u);
 	else
 	{
-		while ((cad).flag_precision-- > 0)
-			zero_for_precision == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
-		if (!do_not_print)
+		while ((g_cad).f_p-- > 0)
+			g_zero_f_p == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
+		if (!g_do_not_print)
 			ft_putnbr_uu_fd(u, 0);
-		while ((cad).flag_width-- > 0)
+		while ((g_cad).f_w-- > 0)
 			ft_putchar_fd(' ', 0);
 	}
 }

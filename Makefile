@@ -6,7 +6,7 @@
 #    By: famacama <famacama@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/06 10:02:09 by famacama          #+#    #+#              #
-#    Updated: 2020/10/06 10:02:16 by famacama         ###   ########.fr        #
+#    Updated: 2020/10/09 12:35:45 by famacama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS = 	ft_printf.c \
 		printf_s.c \
 		printf_u.c \
 		printf_x.c \
-		printf_xX.c \
+		printf_m_x.c \
 		l_value.c \
 		ft_strlen.c \
 		ft_putstr_fd.c \

@@ -6,7 +6,7 @@
 /*   By: famacama <famacama@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 10:02:58 by famacama          #+#    #+#             */
-/*   Updated: 2020/10/06 10:03:00 by famacama         ###   ########.fr       */
+/*   Updated: 2020/10/09 12:45:07 by famacama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,48 +17,48 @@ void	write_printf_s(void)
 	int i;
 
 	i = 0;
-	if ((cad).flag_minus == -1)
+	if ((g_cad).f_m == -1)
 	{
-		while ((cad).flag_width-- > 0)
-			(cad).flag_zero == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
-		if (s == NULL)
-			while (g_string_null && g_string_null[i] && length_value--)
+		while ((g_cad).f_w-- > 0)
+			(g_cad).f_z == 1 ? ft_putchar_fd('0', 0) : ft_putchar_fd(' ', 0);
+		if (g_s == NULL)
+			while (g_string_null && g_string_null[i] && g_length_value--)
 				ft_putchar_fd(g_string_null[i++], 0);
 		else
-			while (s && s[i] && length_value--)
-				ft_putchar_fd(s[i++], 0);
+			while (g_s && g_s[i] && g_length_value--)
+				ft_putchar_fd(g_s[i++], 0);
 	}
 	else
 	{
-		if (s == NULL)
-			while (g_string_null && g_string_null[i] && length_value--)
+		if (g_s == NULL)
+			while (g_string_null && g_string_null[i] && g_length_value--)
 				ft_putchar_fd(g_string_null[i++], 0);
 		else
-			while (s && s[i] && length_value--)
-				ft_putchar_fd(s[i++], 0);
-		while ((cad).flag_width-- > 0)
+			while (g_s && g_s[i] && g_length_value--)
+				ft_putchar_fd(g_s[i++], 0);
+		while ((g_cad).f_w-- > 0)
 			ft_putchar_fd(' ', 0);
 	}
 }
 
-void	printf_s(va_list *my_list)
+void	printf_s(va_list *g_my_list)
 {
 	int i;
 
-	s = va_arg(*my_list, char *);
-	length_value = ft_strlen(s);
+	g_s = va_arg(*g_my_list, char *);
+	g_length_value = ft_strlen(g_s);
 	i = 0;
 	g_string_null = "(null)";
-	if (s == NULL)
-		length_value = 6;
-	if (((cad).flag_precision < length_value))
+	if (g_s == NULL)
+		g_length_value = 6;
+	if (((g_cad).f_p < g_length_value))
 	{
-		if ((cad).flag_precision != -1)
-			(cad).flag_width += (length_value - (cad).flag_precision);
-		(cad).flag_width -= length_value;
-		length_value = (cad).flag_precision;
+		if ((g_cad).f_p != -1)
+			(g_cad).f_w += (g_length_value - (g_cad).f_p);
+		(g_cad).f_w -= g_length_value;
+		g_length_value = (g_cad).f_p;
 	}
 	else
-		(cad).flag_width -= length_value;
+		(g_cad).f_w -= g_length_value;
 	write_printf_s();
 }

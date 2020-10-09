@@ -6,88 +6,83 @@
 /*   By: famacama <famacama@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 10:01:52 by famacama          #+#    #+#             */
-/*   Updated: 2020/10/06 10:01:57 by famacama         ###   ########.fr       */
+/*   Updated: 2020/10/09 13:14:22 by famacama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void (*TabFunction[10]) (va_list *) = {printf_c, printf_s, printf_p,
-	printf_d, printf_i, printf_u, printf_x, printf_xX};
-
-void	calculate_widht(const char *str, va_list *my_list)
+void	calculate_widht(const char *str, va_list *g_my_list)
 {
-	if (str[y] == '*')
+	if (str[g_y] == '*')
 	{
-		(cad).flag_width = va_arg(*my_list, int);
-		if ((cad).flag_width < 0)
+		(g_cad).f_w = va_arg(*g_my_list, int);
+		if ((g_cad).f_w < 0)
 		{
-			(cad).flag_width *= -1;
-			(cad).flag_minus = 1;
+			(g_cad).f_w *= -1;
+			(g_cad).f_m = 1;
 		}
 	}
 	else
-		(cad).flag_width = ft_printf_atoi(str);
+		(g_cad).f_w = ft_printf_atoi(str);
 }
 
-void	calculate_presision(const char *str, va_list *my_list)
+void	calculate_presision(const char *str, va_list *g_my_list)
 {
-	y++;
-	if ((str[y] >= '0') && (str[y] <= '9'))
-		(cad).flag_precision = ft_printf_atoi(str);
-	else if (str[y] == '*')
+	g_y++;
+	if ((str[g_y] >= '0') && (str[g_y] <= '9'))
+		(g_cad).f_p = ft_printf_atoi(str);
+	else if (str[g_y] == '*')
 	{
-		(cad).flag_precision = va_arg(*my_list, int);
-		if ((cad).flag_precision < 0)
-			(cad).flag_precision = -1;
+		(g_cad).f_p = va_arg(*g_my_list, int);
+		if ((g_cad).f_p < 0)
+			(g_cad).f_p = -1;
 	}
 	else
-		(cad).flag_precision = 0;
+		(g_cad).f_p = 0;
 }
 
-void	find_all_flags_and_conversion(const char *str, va_list *my_list)
+void	find_all_flags_and_conversion(const char *str, va_list *g_my_list)
 {
-	while (str[y] && str && str[y + 1])
+	while (str[g_y] && str && str[g_y + 1])
 	{
-		y++;
-		if (str[y] == '-' && str[y])
-			(cad).flag_minus = 1;
-		else if ((str[y] == '0') && (str[y]) && ((cad).flag_zero != 1))
-			(cad).flag_zero = 1;
-		else if (((str[y] >= '0') && (str[y] <= '9')) || (str[y] == '*'))
-			calculate_widht(str, my_list);
-		else if (str[y] == '.')
-			calculate_presision(str, my_list);
+		g_y++;
+		if (str[g_y] == '-' && str[g_y])
+			(g_cad).f_m = 1;
+		else if ((str[g_y] == '0') && (str[g_y]) && ((g_cad).f_z != 1))
+			(g_cad).f_z = 1;
+		else if (((str[g_y] >= '0') && (str[g_y] <= '9')) || (str[g_y] == '*'))
+			calculate_widht(str, g_my_list);
+		else if (str[g_y] == '.')
+			calculate_presision(str, g_my_list);
 		if (find_conversion(str) != -1)
 			return ;
 	}
 }
 
-int	ft_printf(const char *str, ...)
+int		ft_printf(const char *str, ...)
 {
-	y = 0;
-	r = 0;
-	va_start(my_list, str);
-	while (str[y] && str)
+	g_y = 0;
+	g_r = 0;
+	va_start(g_my_list, str);
+	while (str[g_y] && str)
 	{
-		if (str[y] == '%')
+		if (str[g_y] == '%')
 		{
 			init_struct_to_begin_value();
-			find_all_flags_and_conversion(str, &my_list);
-			if (((cad).conversion < 8) && ((cad).conversion > -1))
-			{
-				(*TabFunction[(cad).conversion]) (&my_list);
-			}
-			else if ((cad).conversion == 8)
+			find_all_flags_and_conversion(str, &g_my_list);
+			if (((g_cad).conversion < 8) && ((g_cad).conversion > -1))
+				(*g_tabfunction[(g_cad).conversion])(&g_my_list);
+			else if ((g_cad).conversion == 8)
 				printf_100();
 			else
-				y++;
+				g_y++;
 		}
 		else
 		{
-			ft_putchar_fd(str[y], 0);
-			y++;
+			ft_putchar_fd(str[g_y], 0);
+			g_y++;
 		}
 	}
-	return (r);
+	return (g_r);
 }
